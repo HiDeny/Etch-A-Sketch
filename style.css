@@ -22,3 +22,11 @@
     justify-content: stretch;
     align-content: stretch;
 }
+
+.black {
+    background-color: black;
+}
+
+.white {
+    background-color: white;
+}

@@ -11,21 +11,26 @@
 // Query Selectors
 const container = document.querySelector('.container');
 
-
 // Create 16x16 grid.
-const size = 16*16;
+const size = 16;
 
+function insertHi (event) {
+    const node = event.target;
+    node.style['background-color'] = 'pink';
+    console.log('done!');
+    console.log(node);
+}
 
-
-function createGrid () {
-    for (let i = 0; i < 16; i++) {
+function createGrid (size) {
+    for (let i = 0; i < size; i++) {
         const row = document.createElement('div');
         row.setAttribute('class', 'row');
         container.appendChild(row);
-        for (let y = 0; y < 16; y++) {
+        for (let y = 0; y < size; y++) {
             const cell = document.createElement('div');
             cell.setAttribute('class', 'cell');
-            // cell.textContent = y+1;
+            row.addEventListener('mouseover', insertHi);
+            cell.textContent = y+1;
             row.appendChild(cell);
             console.log(y);
         }
@@ -36,6 +41,7 @@ function createGrid () {
     }
 }
 
-createGrid();
+
+createGrid(size);
 
 
