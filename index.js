@@ -25,9 +25,11 @@ const body = document.querySelector('body');
 
 
 const divBtns = document.createElement('div');
+divBtns.setAttribute('class', 'divBtns');
 const btnSizeChange = document.createElement('button');
 const btnEraser = document.createElement('button');
 const btnRainbowColor = document.createElement('button');
+const btnClear = document.createElement('button');
 
 const colorPicker = document.createElement('input');
 colorPicker.setAttribute('type', 'color');
@@ -49,13 +51,17 @@ body.onmouseup = () => mouseDown = false;
 btnSizeChange.textContent = 'Change Size';
 btnSizeChange.addEventListener('click', changeSize);
 
+let option = 16;
+
 function changeSize() {
-    let option = window.prompt('Select Size (no bigger then 100)');
-    option == null ? option = 16 : option = option;
+    option = window.prompt('Select Size (no bigger then 100)');
+    option == null || option == '' ? option = 16 : option = option;
     if (option <= 100) {
         container.innerHTML = '';
+        console.log(option);
         createGrid(option)
     } else {
+        console.log(option);
         changeSize();
     }
  }
@@ -114,8 +120,14 @@ colorPicker.addEventListener('change', (e) => {
 
 
 
-btnRainbowColor.innerText = 'RAINBOW COLOR!';
+btnRainbowColor.innerText = 'RAINBOW!';
 btnRainbowColor.addEventListener('click', () => currentModeNormal = false);
+
+btnClear.innerText = 'Clear';
+btnClear.addEventListener('click', () => {
+    container.innerHTML = '';
+    createGrid(option);
+});
 
 
 
@@ -124,9 +136,10 @@ btnRainbowColor.addEventListener('click', () => currentModeNormal = false);
 // Add elements
 body.insertBefore(divBtns, container);
 divBtns.appendChild(btnSizeChange);
-divBtns.appendChild(btnEraser);
-divBtns.appendChild(btnRainbowColor);
 divBtns.appendChild(colorPicker);
+divBtns.appendChild(btnEraser);
+divBtns.appendChild(btnClear);
+divBtns.appendChild(btnRainbowColor);
 
 
 
