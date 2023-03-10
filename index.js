@@ -28,7 +28,10 @@ const divBtns = document.createElement('div');
 const btnSizeChange = document.createElement('button');
 const btnEraser = document.createElement('button');
 const btnRainbowColor = document.createElement('button');
-const btnNormalColor = document.createElement('button');
+
+const colorPicker = document.createElement('input');
+colorPicker.setAttribute('type', 'color');
+
 
 
 // Default
@@ -77,8 +80,6 @@ function createGrid (size = 16) {
 createGrid();
 
 // Set up a “hover” effect so that the grid divs change color when your mouse passes over them.
-
-
 function changColor (event) {
     if (event.type === 'mouseover' && !mouseDown) return;
     if (currentModeNormal === true) {
@@ -92,14 +93,16 @@ function changColor (event) {
 
 // Add eraser button
 btnEraser.innerText = 'Eraser';
-btnEraser.addEventListener('click', () => currentColor != 'white' ? currentColor = 'white' : currentColor = currentColor);
+btnEraser.addEventListener('click', () => {
+    if (currentColor != 'white') {
+        currentColor = 'white';
+        currentModeNormal = true;
+    }
+});
 
 // Color mode 
-
-
-btnNormalColor.textContent = 'Black color';
-btnNormalColor.addEventListener('click', () => {
-    currentColor = 'black';
+colorPicker.addEventListener('change', (e) => {
+    currentColor = e.target.value;
     currentModeNormal = true;
 });
 
@@ -122,8 +125,8 @@ btnRainbowColor.addEventListener('click', () => currentModeNormal = false);
 body.insertBefore(divBtns, container);
 divBtns.appendChild(btnSizeChange);
 divBtns.appendChild(btnEraser);
-divBtns.appendChild(btnNormalColor);
 divBtns.appendChild(btnRainbowColor);
+divBtns.appendChild(colorPicker);
 
 
 
